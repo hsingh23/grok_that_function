@@ -1,11 +1,9 @@
 """ Server for grok that function
 
 """
-import sympy
 from flask import Flask
 from flask import request
-from sympy.parsing import sympy_parser
-from grok_that_function.sage.misc import preparser
+from math_query import MathQuery
 
 app = Flask(__name__)
 
@@ -21,33 +19,10 @@ def series():
         # TODO user input might not be something we can actually process, we
         # should handle that case (ideally help the user figure out what we
         # don't understand)
-        return taylor_series(query)
+        math_query = MathQuery(query)
+        return math_query.taylor_series()
     else:
         return ""
-
-
-def taylor_series(query):
-    """ Produces the taylor series expansion of the query with respect to the
-    first free symbol it find (i.e. arbitrarily)
-
-    """
-    expression = sympy_parser.parse_expr(preparser.preparse(query))
-    symbols = list(expression.free_symbols)
-    if len(symbols) == 0:
-        # no variables, so it's just a constant
-        return sympy.N(expression)
-    else:
-        # arbitrarily pick the first variable to vary against
-
-        # TODO at some point we are going to want the taylor series expansion
-        # against each variable
-
-        # TODO order is also aribtrary right now, later we're going to want to
-        # vary it based upon required accuracy
-        symbol = symbols[0]
-        order = 9
-        series_expansion = expression.series(symbol, 0, order)
-        return str(sympy.N(series_expansion))
 
 if __name__ == "__main__":
     app.run(debug=True)
