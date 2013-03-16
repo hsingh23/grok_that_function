@@ -1,8 +1,11 @@
+""" Server for grok that function
+
+"""
 import sympy
 from flask import Flask
 from flask import request
 from sympy.parsing import sympy_parser
-from sage.misc import preparser
+from grok_that_function.sage.misc import preparser
 
 app = Flask(__name__)
 
@@ -43,8 +46,8 @@ def taylor_series(query):
         # vary it based upon required accuracy
         symbol = symbols[0]
         order = 9
-        series = expression.series(symbol, 0, order)
-        return str(sympy.N(series))
+        series_expansion = expression.series(symbol, 0, order)
+        return str(sympy.N(series_expansion))
 
 if __name__ == "__main__":
     app.run(debug=True)
