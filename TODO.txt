@@ -1,0 +1,17 @@
+Using sympy... 
+
+from the js, post the typed in formula to the backend
+
+Then:
+import sympy
+from sympy.parsing import sympy_parser
+expression = sympy_parser.parse_expr("exp(1)")
+symbols = expression.free_symbols
+for each symbol...
+  series = expression.series(symbol, 0, some number)
+  # give the series expansion numerically
+  sympy.N(series)
+
+Return the series expansion to the client side, have it plotted via javascript
+Have controls to modify variables via javascript...
+
