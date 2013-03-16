@@ -6,6 +6,7 @@ from sage.misc import preparser
 
 app = Flask(__name__)
 
+
 @app.route("/series")
 def series():
     """ Endpoint to get the taylor series expansion of a function
@@ -21,6 +22,7 @@ def series():
     else:
         return ""
 
+
 def taylor_series(query):
     """ Produces the taylor series expansion of the query with respect to the
     first free symbol it find (i.e. arbitrarily)
@@ -32,7 +34,7 @@ def taylor_series(query):
         # no variables, so it's just a constant
         return sympy.N(expression)
     else:
-        # arbitrarily pick the first variable to vary against 
+        # arbitrarily pick the first variable to vary against
 
         # TODO at some point we are going to want the taylor series expansion
         # against each variable
@@ -46,4 +48,3 @@ def taylor_series(query):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
