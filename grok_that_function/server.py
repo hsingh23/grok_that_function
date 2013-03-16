@@ -1,11 +1,26 @@
 """ Server for grok that function
 
 """
-from flask import Flask
-from flask import request
+from flask import Flask, request, render_template
 from math_query import MathQuery
 
 app = Flask(__name__)
+
+
+@app.route("/")
+def index():
+    """ Serve up the backbone application
+
+    """
+    return render_template("index.html")
+
+
+@app.route("/math_functions")
+def math_functions():
+    """ Returns a collection of math_functions
+
+    """
+    return """[{"inputs": ["x"], "functionBody": "return Math.sin(x);"}]"""
 
 
 @app.route("/series")
