@@ -12,3 +12,17 @@ class Test(unittest.TestCase):
         """
         math_query = MathQuery("(x^k)/k! exp(-x)")
         math_query.taylor_series()
+
+    def test_sine_to_javascript(self):
+        """ Trigonmetric functions that javascript can represent should be
+        represented as such
+
+        """
+        pass
+
+    def test_exponential_to_javascript(self):
+        """ Exponentials in python are represented as 3**2, but in javascript it
+        should be Math.pow(3, 2)
+
+        """
+        pass
