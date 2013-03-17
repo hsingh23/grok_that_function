@@ -7,7 +7,9 @@ require.config({
     'json2': 'lib/json2',
     'handlebars': 'lib/handlebars',
     'hb': 'lib/hbtemplate',
-    'text': 'lib/text'
+    'text': 'lib/text',
+    'flot': './lib/jquery.flot',
+    'templates': '../templates'
   },
   shim: {
     'backbone': {
@@ -22,6 +24,9 @@ require.config({
     },
     'json2': {
       exports: 'JSON'
+    },
+    'flot': {
+      deps: ['jquery']
     }
   }
 }); 

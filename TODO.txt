@@ -17,3 +17,6 @@ Have controls to modify variables via javascript...
 
 
 Write recursive descent parser to tranform to javscript
+
+We have to have someway of modifying the limits of the graph / do resolution
+stuff on the fly, too
