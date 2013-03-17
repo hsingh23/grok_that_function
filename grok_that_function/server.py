@@ -20,7 +20,7 @@ def math_functions():
     """ Returns a collection of math_functions
 
     """
-    return """[{"inputs": ["x"], "functionBody": "return Math.sin(x);"}]"""
+    return """[{"inputs": ["x", "y"], "functionBody": "return Math.sin(params.x * params.y);"}]"""
 
 
 @app.route("/series")

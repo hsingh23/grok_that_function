@@ -4,10 +4,9 @@ define([
 ], function(_, Backbone){
   var MathFunction = Backbone.Model.extend({
     initialize: function(attributes) {
-      var callableFunctionArgs =
-        this.get("inputs").concat([this.get("functionBody")]);
+      var callableFunctionArgs = ["params", this.get("functionBody")];
 
-        this.valueAt = Function.apply(this, callableFunctionArgs);
+      this.valueAt = Function.apply(this, callableFunctionArgs);
     }
   });
 
