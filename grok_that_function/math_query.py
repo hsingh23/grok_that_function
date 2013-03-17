@@ -44,6 +44,6 @@ class MathQuery(object):
             # TODO order is also aribtrary right now, later we're going to want
             # to vary it based upon required accuracy
             symbol = symbols[0]
-            order = 3
+            order = 5
             series_expansion = expression.series(symbol, 0, order)
             return str(sympy.N(series_expansion))

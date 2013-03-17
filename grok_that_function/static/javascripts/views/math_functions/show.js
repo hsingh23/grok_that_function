@@ -16,7 +16,7 @@ define([
       graphEl = $('.graph', this.$el);
 
       for (var i = 0; i < 2 * Math.PI; i += .1) {
-        graphData.push([i, this.model.valueAt({x: i, y: 1})]);
+        graphData.push([i, this.model.valueAt({x: i, y: 1, z: 1})]);
       }
 
       $.plot(graphEl, [graphData]);
