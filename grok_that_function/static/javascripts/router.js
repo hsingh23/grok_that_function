@@ -2,12 +2,12 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'collections/math_functions',
-  'views/math_functions/list',
-], function($, _, Backbone, MathFunctions, MathFunctionsListView){
+  'collections/expressions',
+  'views/expressions/list',
+], function($, _, Backbone, Expressions, ExpressionsListView){
   var AppRouter = Backbone.Router.extend({
     routes: {
-      'math_functions': 'showMathFunctions',
+      'expressions': 'showExpressions',
 
       // Default
       '*actions': 'defaultAction'
@@ -17,15 +17,15 @@ define([
   var initialize = function(){
     var appRouter = new AppRouter();
 
-    appRouter.on('route:showMathFunctions', function() {
-      var mathFunctions,
-          mathFunctionsView;
+    appRouter.on('route:showExpressions', function() {
+      var expressions,
+          expressionsView;
 
-      mathFunctions = new MathFunctions();
-      mathFunctions.fetch({success: function() {
+      expressions = new Expressions();
+      expressions.fetch({success: function() {
         $(function() {
-        mathFunctionsView = new MathFunctionsListView({el: $('#container'), collection: mathFunctions});
-        mathFunctionsView.render();
+        expressionsView = new ExpressionsListView({el: $('#container'), collection: expressions});
+        expressionsView.render();
         });
       }});
     });

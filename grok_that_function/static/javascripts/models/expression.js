@@ -2,7 +2,7 @@ define([
   'underscore',
   'backbone'
 ], function(_, Backbone){
-  var MathFunction = Backbone.Model.extend({
+  var Expression = Backbone.Model.extend({
     initialize: function(attributes) {
       var callableFunctionArgs = ["params", this.get("functionBody")];
 
@@ -10,5 +10,5 @@ define([
     }
   });
 
-  return MathFunction;
+  return Expression;
 });

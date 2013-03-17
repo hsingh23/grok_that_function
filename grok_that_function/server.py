@@ -2,7 +2,7 @@
 
 """
 from flask import Flask, request, render_template
-from math_query import MathQuery
+from expression import Expression
 
 app = Flask(__name__)
 
@@ -15,9 +15,9 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/math_functions")
-def math_functions():
-    """ Returns a collection of math_functions
+@app.route("/expressions")
+def expressions():
+    """ Returns a collection of expressions
 
     """
     return """[{"params": ["x", "y", "z"], "functionBody": "return params.z * Math.sin(params.x * params.y);"}]"""
@@ -34,8 +34,8 @@ def series():
         # TODO user input might not be something we can actually process, we
         # should handle that case (ideally help the user figure out what we
         # don't understand)
-        math_query = MathQuery(query)
-        return math_query.taylor_series()
+        expression = Expression(query)
+        return expression.taylor_series()
     else:
         return ""
 

@@ -1,4 +1,4 @@
-""" This module contains the MathQuery class
+""" This module contains the Expression class
 
 """
 
@@ -7,9 +7,8 @@ from sympy.parsing import sympy_parser
 from sage.misc import preparser
 
 
-class MathQuery(object):
-    """ MathQuery is takes a user input and allows transformations on that
-    input.
+class Expression(object):
+    """ Expression takes user input and allows transformations on that input.
 
     """
 
@@ -25,8 +24,8 @@ class MathQuery(object):
         """ Produces the taylor series expansion of the query with respect to
         the first free symbol it find (i.e. arbitrarily)
 
-            >>> math_query = MathQuery("((x^k)/k!) exp(-x)")
-            >>> math_query.taylor_series()
+            >>> expression = Expression("((x^k)/k!) exp(-x)")
+            >>> expression.taylor_series()
             'exp(-x) + k*(exp(-x)*log(x) + 0.577215664901533*exp(-x)) + k**2*(0.5*exp(-x)*log(x)**2 + 0.577215664901533*exp(-x)*log(x) - 0.655878071520254*exp(-x)) + O(k**3)'
 
         """

@@ -3,14 +3,14 @@ define([
   'underscore',
   'backbone',
   'flot',
-  'hb!templates/math_functions/show.hb'
-], function($, _, Backbone, Flot, mathFunctionShowTemplate) {
-  var MathFunctionShowView = Backbone.View.extend({
+  'hb!templates/expressions/show.hb'
+], function($, _, Backbone, Flot, expressionShowTemplate) {
+  var ExpressionShowView = Backbone.View.extend({
     render: function(){
       var graphData = [],
           graphEl;
 
-      this.$el.append(mathFunctionShowTemplate());
+      this.$el.append(expressionShowTemplate());
       // TODO there is a bug with more than one graph, what's the correct way to
       // do this...?
       graphEl = $('.graph', this.$el);
@@ -23,5 +23,5 @@ define([
     }
   });
 
-  return MathFunctionShowView;
+  return ExpressionShowView;
 });
