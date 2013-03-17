@@ -7,12 +7,17 @@ define([
 ], function($, _, Backbone, mathFunctionsListTemplate, mathFunctionShowView) {
   var MathFunctionsListView = Backbone.View.extend({
     render: function(){
-      var model = this.collection.models[0],
-          modelView;
-      // TODO model and el should be made from a list...
+      var model,
+          modelView,
+          graphsEl;
 
-      modelView = new mathFunctionShowView({model: model, el: this.$el})
-      modelView.render();
+      this.$el.append(mathFunctionsListTemplate());
+      graphsEl = $('.graphs', this.$el);
+      for (var i = 0; i < this.collection.models.length; i++) {
+        model = this.collection.models[i];
+        modelView = new mathFunctionShowView({model: model, el: graphsEl})
+        modelView.render();
+      }
     }
   });
 

@@ -1,1 +1,1 @@
-{{graphData}}
+<div class="graph"></div>
