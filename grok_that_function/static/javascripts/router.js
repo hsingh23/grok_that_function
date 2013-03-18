@@ -22,12 +22,7 @@ define([
           expressionsView;
 
       expressions = new Expressions();
-      expressions.fetch({success: function() {
-        $(function() {
-        expressionsView = new ExpressionsListView({el: $('#container'), collection: expressions});
-        expressionsView.render();
-        });
-      }});
+      expressionsView = new ExpressionsListView({el: $('#container'), collection: expressions});
     });
 
     appRouter.on('route:defaultAction', function(actions) {
