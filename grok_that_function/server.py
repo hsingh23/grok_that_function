@@ -20,7 +20,9 @@ def expressions():
     """ Returns a collection of expressions
 
     """
+    # TODO actually return a user inputted expression :)
     return """[{"params": ["x", "y", "z"], "functionBody": "return params.z * Math.sin(params.x * params.y);"}]"""
+    #return """[{"params": ["x", "y", "z"], "functionBody": "return params.z * Math.sin(params.x * params.y);"},{"params": ["x", "y", "z"], "functionBody": "return params.z * Math.sin(params.x * params.y);"}]"""
 
 
 @app.route("/series")

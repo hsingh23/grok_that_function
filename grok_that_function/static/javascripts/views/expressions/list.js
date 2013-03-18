@@ -35,6 +35,10 @@ define([
       return this;
     },
 
+    events: {
+      'keyup .controls .control input': 'updateExpressionParams'
+    },
+
     addOne: function(expression) {
       var expressionView = new expressionShowView({model: expression})
       this.subviews.push(expressionView);
@@ -62,6 +66,15 @@ define([
       // rendered because of the way flot works
       this.graphsEl.append(subview.el);
       subview.render();
+    },
+
+    updateExpressionParams: function(e) {
+      var target = $(e.target);
+
+      // TODO is this messing up encapsulation?
+      this.collection.models.forEach(function(model) {
+        model.setParam(target.attr('name'), parseFloat(target.val()));
+      }, this);
     },
 
     modelParams: function () {

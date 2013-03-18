@@ -11,10 +11,20 @@ define([
 ], function($, _, Backbone, Flot, expressionShowTemplate) {
   var ExpressionShowView = Backbone.View.extend({
 
+    initialize: function() {
+      this.listenTo(this.model, 'change:params', this.renderPlot);
+    },
+
     render: function() {
       this.$el.html(expressionShowTemplate());
       this.graphEl = this.$('.graph');
 
+      this.renderPlot();
+
+      return this;
+    },
+
+    renderPlot: function() {
       this.computeData();
       $.plot(this.graphEl, [this.data]);
 
@@ -22,10 +32,16 @@ define([
     },
 
     computeData: function() {
+      var dataPoint = {};
       this.data = [];
 
+      // TODO remove this hack and push logic down into the model
+      // TODO the other complication is that the step size should depend upon
+      // the expression
       for (var i = 0; i < 2 * Math.PI; i += .1) {
-        this.data.push([i, this.model.valueAt({x: i, y: 1, z: 1})]);
+        _.extend(dataPoint, this.model.get('params'));
+        dataPoint['x'] = i;
+        this.data.push([i, this.model.valueAt(dataPoint)]);
       }
     }
   });
