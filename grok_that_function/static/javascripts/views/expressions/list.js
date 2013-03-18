@@ -2,9 +2,14 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  'views/expressions/show',
   'hb!templates/expressions/list.hb',
-  'views/expressions/show'
-], function($, _, Backbone, expressionsListTemplate, expressionShowView) {
+  'hb!templates/expressions/controls.hb'
+], function($, _, Backbone, 
+            expressionShowView, 
+            expressionsListTemplate, 
+            expressionsControlsTemplate) {
+
   var ExpressionsListView = Backbone.View.extend({
     initialize: function() {
       this.$el.append(expressionsListTemplate());
@@ -38,7 +43,15 @@ define([
     },
 
     createControls: function() {
-      console.log('should we create controls? (do this lazily)');
+      var modelParams;
+      if ((this.collection.models.length > 0) && !this.controlsCreated) {
+        // This assumes that all model parameters are the same for our
+        // collection
+        modelParams = this.collection.models[0].get('params');
+        this.controlsEl.append(expressionsControlsTemplate({params: modelParams}));
+
+        this.controlsCreated = true;
+      }
     }
   });
 
