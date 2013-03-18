@@ -31,7 +31,7 @@ require.config({
   }
 }); 
 
-require(['app'], 
-  function(app){
+require(['app', './lib/es5-shim.min'], 
+  function(app) {
     app.initialize();
 });
