@@ -10,12 +10,11 @@ define([
   'hb!templates/expressions/show.hb'
 ], function($, _, Backbone, Flot, expressionShowTemplate) {
   var ExpressionShowView = Backbone.View.extend({
-    initialize: function() {
-      this.$el.append(expressionShowTemplate());
-      this.graphEl = this.$('.graph');
-    },
 
     render: function() {
+      this.$el.html(expressionShowTemplate());
+      this.graphEl = this.$('.graph');
+
       this.computeData();
       $.plot(this.graphEl, [this.data]);
 

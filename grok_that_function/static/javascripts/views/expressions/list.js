@@ -9,48 +9,66 @@ define([
             expressionShowView, 
             expressionsListTemplate, 
             expressionsControlsTemplate) {
-
   var ExpressionsListView = Backbone.View.extend({
+
     initialize: function() {
-      this.$el.append(expressionsListTemplate());
-
-      this.graphsEl = this.$('.graphs');
-      this.controlsEl = this.$('.controls');
-      // TODO initialize a controls view...? Or keep it tied in here?
-
+      this.subviews = [];
       this.listenTo(this.collection, 'add', this.addOne);
       this.listenTo(this.collection, 'reset', this.addAll);
-      this.listenTo(this.collection, 'all', this.render);
+      // TODO I'm unsure of the correct way to handle this, after everything is
+      // added render needs to be called, currently the below listener does
+      // that, however its dependent on the order of the listeners
+      this.listenTo(this.collection, 'reset', this.render);
 
       this.collection.fetch();
     },
 
     render: function() {
-      this.createControls();
-      // TODO should I do something with the renders of the subviews...?
+      this.$el.html(expressionsListTemplate());
+      this.graphsEl = this.$('.graphs');
+      this.controlsEl = this.$('.controls');
+
+      this.
+        renderSubviews().
+        renderControls();
+
+      return this;
     },
 
     addOne: function(expression) {
       var expressionView = new expressionShowView({model: expression})
-      // unfortunately for expressionShowView, it must be appended before it is
-      // rendered because of the way flot works
-      this.graphsEl.append(expressionView.el);
-      expressionView.render();
+      this.subviews.push(expressionView);
     },
 
     addAll: function() {
-      this.collection.each(this.addOne, this);
+      this.collection.forEach(this.addOne, this);
     },
 
-    createControls: function() {
-      var modelParams;
-      if ((this.collection.models.length > 0) && !this.controlsCreated) {
-        // This assumes that all model parameters are the same for our
-        // collection
-        modelParams = this.collection.models[0].get('params');
-        this.controlsEl.append(expressionsControlsTemplate({params: modelParams}));
+    renderControls: function() {
+      this.controlsEl.html(
+        expressionsControlsTemplate({params: this.modelParams()}));
 
-        this.controlsCreated = true;
+      return this;
+    },
+
+    renderSubviews: function() {
+      this.subviews.forEach(this.renderSubview, this);
+
+      return this;
+    },
+
+    renderSubview: function(subview) {
+      // unfortunately for expressionShowView, it must be appended before it is
+      // rendered because of the way flot works
+      this.graphsEl.append(subview.el);
+      subview.render();
+    },
+
+    modelParams: function () {
+      if (this.collection.models.length !== 0) {
+        return this.collection.models[0].get('params');
+      } else {
+        return [];
       }
     }
   });
