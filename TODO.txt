@@ -1,22 +1,25 @@
-Using sympy... 
+TODOs
+These are obviously not all inclusive, just a few next steps. 
 
-from the js, post the typed in formula to the backend
+Make a class (or modify expression) to take in an expression object and output
+the javascript equivalent. -- Take a look at the expressions method in server.py
+to get a sense of the js it should return.
 
-Then:
-import sympy
-from sympy.parsing import sympy_parser
-expression = sympy_parser.parse_expr("exp(1)")
-symbols = expression.free_symbols
-for each symbol...
-  series = expression.series(symbol, 0, some number)
-  # give the series expansion numerically
-  sympy.N(series)
+Create an interface for inputting expressions -- the big thing with this is
+figuring out how to get the components separated. Whether the user simply enters
+in components separately, whether we have a way for them to split up an
+expression, or whether we try to do that automatically on the backend, and then
+have them modify it after they can see the graphs.
 
-Return the series expansion to the client side, have it plotted via javascript
-Have controls to modify variables via javascript...
+Have sane default values for expressions when they're sent to the frontend.
 
+Figure out scaling issues of the graph such that it's easy to compare between
+graphs.
 
-Write recursive descent parser to tranform to javscript
+Push computeData down to the expression model in backbone, the API for that
+should be something like: expression.computeData('x', -1, 1, .01) where -1 - 1
+is the range of x and .01 is the step size.
 
-We have to have someway of modifying the limits of the graph / do resolution
-stuff on the fly, too
+Decide upon and begin to implement a better interface for the comparison view. I
+have some sketches of this, lets talk.
+
